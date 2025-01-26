@@ -18,7 +18,7 @@ Check out the live demo of the application here:
 3. [How It Works](#how-it-works)
 4. [Training the Model](#training-the-model)
 5. [Running Inference](#running-inference)
-6. [API Documentation}
+6. [API Documentation](#API-Documentation)
 7. [Requirements](#requirements)
 8. [Demo](#demo)
 9. [License](#license)
