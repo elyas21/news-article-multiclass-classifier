@@ -9,6 +9,12 @@ Check out the live demo of the application here:
 
 [Demo Link](https://news-article-multiclass-classifier.onrender.com/)
 
+### Example Request
+```bash
+curl -X POST https://news-article-multiclass-classifier.onrender.com/predict \
+-H "Content-Type: application/json" \
+-d '{"text": "Your news article text here..."}'
+```
 ![Screenshot](screenshot.png)
 
 ## Table of Contents
