@@ -142,7 +142,7 @@ Send a POST request to the `/predict` endpoint with the following JSON payload:
 {
     "text": "Your news article text here..."
 }
-
+```
 ## Requirements
 
 The project requires the following Python libraries: - Flask - cikit-learn - pandas - numpy - nltk - joblib
