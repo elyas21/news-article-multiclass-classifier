@@ -184,6 +184,34 @@ fetch('/predict', {
 
     <script>
       // Function to submit the news article for classification
+      //   function submitArticle() {
+      //     const text = document.getElementById("news-article").value;
+      //     fetch("/predict", {
+      //       method: "POST",
+      //       headers: {
+      //         "Content-Type": "application/json",
+      //       },
+      //       body: JSON.stringify({ text: text }),
+      //     })
+      //       .then((response) => response.json())
+      //       .then((data) => {
+      //         const resultDiv = document.getElementById("result");
+      //         if (data.status === "success") {
+      //           const confidence = (data.confidence * 100).toFixed(2); // Convert to percentage
+      //           resultDiv.innerHTML = `
+      //                     <p>Predicted Class: <span class="class-name">${data.class}</span></p>
+      //                     <p>Confidence: <span class="confidence">${confidence}%</span></p>
+      //                 `;
+      //         } else {
+      //           resultDiv.innerHTML = `<p class="error">Error: Unable to classify the article.</p>`;
+      //         }
+      //       })
+      //       .catch((error) => {
+      //         console.error("Error:", error);
+      //         const resultDiv = document.getElementById("result");
+      //         resultDiv.innerHTML = `<p class="error">Error: Unable to connect to the server.</p>`;
+      //       });
+      //   }
       function submitArticle() {
         const text = document.getElementById("news-article").value;
         fetch("/predict", {
@@ -199,11 +227,11 @@ fetch('/predict', {
             if (data.status === "success") {
               const confidence = (data.confidence * 100).toFixed(2); // Convert to percentage
               resultDiv.innerHTML = `
-                        <p>Predicted Class: <span class="class-name">${data.class}</span></p>
-                        <p>Confidence: <span class="confidence">${confidence}%</span></p>
-                    `;
+                <p>Predicted Class: <span class="class-name">${data.class}</span></p>
+                <p>Confidence: <span class="confidence">${confidence}%</span></p>
+            `;
             } else {
-              resultDiv.innerHTML = `<p class="error">Error: Unable to classify the article.</p>`;
+              resultDiv.innerHTML = `<p class="error">Error: ${data.message}</p>`;
             }
           })
           .catch((error) => {
