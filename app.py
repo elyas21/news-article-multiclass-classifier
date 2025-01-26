@@ -14,11 +14,15 @@ tfidf = joblib.load('tfidf_vectorizer.pkl')
 def home():
     return render_template('index.html')
 
-# Serverless function for the /predict endpoint
-def predict_handler(request):
+# Endpoint for making predictions
+@app.route('/predict', methods=['POST'])
+def predict():
     try:
         # Get the text data from the POST request
         data = request.get_json()
+        if not data or 'text' not in data:
+            return jsonify({'status': 'error', 'message': 'Missing text field'}), 400
+        
         text = data['text']
         
         # Preprocess the input text
@@ -41,28 +45,24 @@ def predict_handler(request):
         class_name = class_names.get(prediction[0], "Unknown")
         
         # Return the response in the desired format
-        return {
-            'statusCode': 200,
-            'body': json.dumps({
-                'status': 'success',
-                'confidence': float(confidence),
-                'class': class_name
-            })
-        }
+        return jsonify({
+            'status': 'success',
+            'confidence': float(confidence),
+            'class': class_name
+        })
     except Exception as e:
-        return {
-            'statusCode': 500,
-            'body': json.dumps({
-                'status': 'error',
-                'message': str(e)
-            })
-        }
+        return jsonify({
+            'status': 'error',
+            'message': str(e)
+        }), 500
 
 # Function for preprocessing the input text
 def preprocess_text(text):
     # Add your preprocessing steps here
+    # Example: Lowercase the text, remove punctuation, etc.
+    text = text.lower()  # Example: Convert to lowercase
     return text
 
 # Run the Flask app (for local development)
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
