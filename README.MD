@@ -44,7 +44,7 @@ The project consists of:
 
 ## Folder Structure
 
-news-article-classifier/
+
 │
 ├── templates/
 │ └── index.html # HTML template for the Flask web app
