@@ -4,3 +4,6 @@ nltk
 matplotlib
 seaborn
 scikit-learn
+flask
+requests
+
