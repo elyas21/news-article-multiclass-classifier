@@ -126,6 +126,7 @@ Here’s a screenshot of the web app in action:
 
 Demo Screenshot
 ![screenshot.png]()
+![Screenshot](screenshot.png)
 
 ## Acknowledgments
 
