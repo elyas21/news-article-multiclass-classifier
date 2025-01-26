@@ -97,17 +97,15 @@ To run the Flask web app:
 
 1. Install the required dependencies:
 
-   ````bash
-   pip install -r requirements.txt bash ```
-
-   ````
+   ```bash
+   pip install -r requirements.txt bash
+   ```
 
 2. Start the Flask app:
 
-   ````bash
-       python app.py ```
-
-   ````
+   ```bash
+       python app.py
+   ```
 
 3. Open your browser and go to http://127.0.0.1:5000/.
 
@@ -117,20 +115,20 @@ To run the Flask web app:
 
 The project requires the following Python libraries: - Flask - cikit-learn - pandas - numpy - nltk - joblib
 Install the dependencies using:
-`bash
-    pip install -r requirements.txt `
+
+```bash
+    pip install -r requirements.txt
+```
+
 Demo
+
 Here’s a screenshot of the web app in action:
 
 Demo Screenshot
+![screenshot.png]()
 
-License
-This project is licensed under the MIT License. See the LICENSE file for details.
+## Acknowledgments
 
-Contributing
-Contributions are welcome! If you find any issues or have suggestions for improvement, please open an issue or submit a pull request.
-
-Acknowledgments
 The dataset used for training and testing is sourced from Kaggle.
 
 ## The project uses the scikit-learn library for machine learning and Flask for the web interface.
