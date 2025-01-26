@@ -56,6 +56,34 @@
         font-size: 16px;
         line-height: 1.6;
       }
+      .curl-request {
+        position: relative;
+      }
+      .curl-request button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: #007bff;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        border-radius: 3px;
+      }
+      .curl-request button:hover {
+        background: #0056b3;
+      }
+      pre {
+        background: #f4f4f4;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+      }
+      code {
+        background: #f4f4f4;
+        padding: 2px 5px;
+        border-radius: 3px;
+      }
     </style>
   </head>
   <body>
@@ -81,38 +109,50 @@
         </p>
         <pre>
 {
-    "text": "Your news article text here..."
+  "text": "Your news article text here..."
 }
-            </pre
-        >
-        <p><strong>Example Request:</strong></p>
+        </pre>
+        <p><strong>API Endpoint:</strong></p>
         <pre>
-fetch('/predict', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-        text: "Your news article text here..."
-    })
+https://news-article-multiclass-classifier.onrender.com/predict
+        </pre>
+        <p><strong>Example cURL Request:</strong></p>
+        <div class="curl-request">
+          <pre id="curl-command">
+curl -X POST https://news-article-multiclass-classifier.onrender.com/predict \
+-H "Content-Type: application/json" \
+-d '{"text": "Your news article text here..."}'
+          </pre>
+          <button onclick="copyCurlCommand()">Copy to Clipboard</button>
+        </div>
+        <p><strong>Example Fetch Request:</strong></p>
+        <pre>
+fetch('https://news-article-multiclass-classifier.onrender.com/predict', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    text: "Your news article text here..."
+  })
 })
 .then(response => response.json())
 .then(data => console.log(data));
-            </pre
-        >
+        </pre>
         <p><strong>Example Response:</strong></p>
         <pre>
 {
-    "prediction": [1]  // Class ID of the predicted category
+  "status": "success",
+  "confidence": 0.95,  // Confidence percentage for the prediction
+  "class": "Sports"    // Predicted class name
 }
-            </pre
-        >
-        <p><strong>Class IDs:</strong></p>
+        </pre>
+        <p><strong>Class Names:</strong></p>
         <ul>
-          <li>1: World</li>
-          <li>2: Sports</li>
-          <li>3: Business</li>
-          <li>4: Science</li>
+          <li>World</li>
+          <li>Sports</li>
+          <li>Business</li>
+          <li>Science</li>
         </ul>
       </div>
     </div>
@@ -121,7 +161,7 @@ fetch('/predict', {
       // Function to submit the news article for classification
       function submitArticle() {
         const text = document.getElementById("news-article").value;
-        fetch("/predict", {
+        fetch("https://news-article-multiclass-classifier.onrender.com/predict", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -131,11 +171,23 @@ fetch('/predict', {
           .then((response) => response.json())
           .then((data) => {
             const resultDiv = document.getElementById("result");
-            resultDiv.innerHTML = `Predicted Class: ${data.prediction[0]}`;
+            resultDiv.innerHTML = `
+              Predicted Class: ${data.class}<br>
+              Confidence: ${(data.confidence * 100).toFixed(2)}%
+            `;
           })
           .catch((error) => {
             console.error("Error:", error);
           });
+      }
+
+      // Function to copy the cURL command to clipboard
+      function copyCurlCommand() {
+        const curlCommand = document.getElementById("curl-command").innerText;
+        navigator.clipboard
+          .writeText(curlCommand)
+          .then(() => alert("cURL command copied to clipboard!"))
+          .catch(() => alert("Failed to copy cURL command."));
       }
     </script>
   </body>
