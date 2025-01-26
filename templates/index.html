@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>News Article Classifier</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        background-color: #f9f9f9;
+      }
+      .header {
+        background-color: #007bff;
+        color: white;
+        padding: 20px;
+        position: fixed;
+        flex: 1;
+        top: 0;
+        width: 100vw;
+        text-align: center;
+        margin-bottom: 30rem;
+      }
+      .header h1 {
+        margin: 0;
+        font-size: 24px;
+      }
+      .header p {
+        margin: 5px 0 0;
+        font-size: 16px;
+      }
+      .container {
+        margin-top: 100px;
+        display: flex;
+        flex: 1;
+      }
+      .left-section,
+      .right-section {
+        flex: 1;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+      .left-section {
+        background-color: #f4f4f4;
+        border-right: 1px solid #ccc;
+        padding-right: 2.7rem;
+      }
+      .right-section {
+        background-color: #fff;
+        overflow-y: scroll;
+        height: calc(100vh - 100px);
+      }
+      textarea {
+        width: 100%;
+        height: 200px;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        resize: none;
+      }
+      button {
+        margin-top: 10px;
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+      .result {
+        margin-top: 20px;
+        font-size: 18px;
+        font-weight: bold;
+      }
+      .documentation {
+        font-size: 16px;
+        line-height: 1.6;
+      }
+      .class-name {
+        color: #007bff;
+      }
+      .confidence {
+        color: #28a745;
+      }
+      @media screen and (max-width: 768px) {
+        .container {
+          flex-direction: column;
+        }
+        .left-section,
+        .right-section {
+          width: 100%;
+        }
+        .header {
+          position: static;
+          margin-bottom: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header Section -->
+    <div class="header">
+      <h1>News Article Classifier</h1>
+      <p>
+        Enter a news article in the text box below, and the app will classify it
+        into one of the following categories: World, Sports, Business, or
+        Science.
+      </p>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+      <!-- Left Section: Input and Submit Button -->
+      <div class="left-section">
+        <h2>Classify News Article</h2>
+        <textarea
+          id="news-article"
+          placeholder="Enter your news article here..."
+        ></textarea>
+        <button onclick="submitArticle()">Submit</button>
+        <div class="result" id="result">
+          <!-- Result will be displayed here -->
+        </div>
+      </div>
+
+      <!-- Right Section: API Documentation -->
+      <div class="right-section">
+        <h2>API Documentation</h2>
+        <div class="documentation">
+          <h3>How to Use the Predict API</h3>
+          <p>
+            To classify a news article, send a POST request to the
+            <code>/predict</code> endpoint with the following JSON payload:
+          </p>
+          <pre>
+{
+    "text": "Your news article text here..."
+}
+                </pre
+          >
+          <p><strong>Example Request:</strong></p>
+          <pre>
+fetch('/predict', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        text: "Your news article text here..."
+    })
+})
+.then(response => response.json())
+.then(data => console.log(data));
+                </pre
+          >
+          <p><strong>Example Response:</strong></p>
+          <pre>
+{
+    "status": "success",
+    "confidence": 0.95,  // Confidence percentage for the prediction
+    "class": "Sports"     // Predicted class name
+}
+                </pre
+          >
+          <p><strong>Class Names:</strong></p>
+          <ul>
+            <li>World</li>
+            <li>Sports</li>
+            <li>Business</li>
+            <li>Science</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Function to submit the news article for classification
+      function submitArticle() {
+        const text = document.getElementById("news-article").value;
+        fetch("/predict", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ text: text }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            const resultDiv = document.getElementById("result");
+            if (data.status === "success") {
+              const confidence = (data.confidence * 100).toFixed(2); // Convert to percentage
+              resultDiv.innerHTML = `
+                        <p>Predicted Class: <span class="class-name">${data.class}</span></p>
+                        <p>Confidence: <span class="confidence">${confidence}%</span></p>
+                    `;
+            } else {
+              resultDiv.innerHTML = `<p class="error">Error: Unable to classify the article.</p>`;
+            }
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+            const resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = `<p class="error">Error: Unable to connect to the server.</p>`;
+          });
+      }
+    </script>
+  </body>
+</html>
