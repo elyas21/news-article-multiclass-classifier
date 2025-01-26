@@ -4,6 +4,8 @@ This project is a **News Article Classifier** that categorizes news articles int
 
 ---
 
+![Screenshot](screenshot.png)
+
 ## Table of Contents
 
 1. [Project Overview](#project-overview)
@@ -125,7 +127,7 @@ Demo
 Here’s a screenshot of the web app in action:
 
 Demo Screenshot
-![screenshot.png]()
+
 ![Screenshot](screenshot.png)
 
 ## Acknowledgments
