@@ -3,6 +3,11 @@
 This project is a **News Article Classifier** that categorizes news articles into one of four classes: **World**, **Sports**, **Business**, or **Science**. It uses a **Naive Bayes classifier** trained on a dataset of news articles. The project includes a Flask-based web application for real-time inference.
 
 ---
+## Demo
+
+Check out the live demo of the application here:
+
+[Demo Link](https://news-article-multiclass-classifier.onrender.com/)
 
 ![Screenshot](screenshot.png)
 
@@ -133,6 +138,11 @@ Demo Screenshot
 ## Acknowledgments
 
 The dataset used for training and testing is sourced from Kaggle.
+
+
+This project is inspired by the following Kaggle notebook:
+
+[News Article Multiclass Classifier by Amnanandrai](https://www.kaggle.com/code/amananandrai/news-article-multiclass-classifier)
 
 ## The project uses the scikit-learn library for machine learning and Flask for the web interface.
 
