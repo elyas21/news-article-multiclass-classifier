@@ -123,6 +123,7 @@ To run the Flask web app:
 4. Enter a news article in the text box and click "Submit" to see the predicted class and confidence score.
 
 ## API Documentation
+## API Documentation
 
 ### How to Use the Predict API
 
@@ -130,7 +131,7 @@ The API allows you to classify news articles into one of four categories: **Worl
 
 ### Endpoint
 
-- **URL**: `/predict`
+- **URL**: [`/predict`](https://news-article-multiclass-classifier.onrender.com/predict)
 - **Method**: `POST`
 - **Content-Type**: `application/json`
 
@@ -142,6 +143,12 @@ Send a POST request to the `/predict` endpoint with the following JSON payload:
 {
     "text": "Your news article text here..."
 }
+```
+### Example Request
+```bash
+$ curl -X POST https://news-article-multiclass-classifier.onrender.com/predict \
+-H "Content-Type: application/json" \
+-d '{"text": "Your news article text here..."}'
 ```
 ## Requirements
 
