@@ -146,7 +146,7 @@ Send a POST request to the `/predict` endpoint with the following JSON payload:
 ```
 ### Example Request
 ```bash
-$ curl -X POST https://news-article-multiclass-classifier.onrender.com/predict \
+curl -X POST https://news-article-multiclass-classifier.onrender.com/predict \
 -H "Content-Type: application/json" \
 -d '{"text": "Your news article text here..."}'
 ```
