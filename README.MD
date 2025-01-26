@@ -18,9 +18,10 @@ Check out the live demo of the application here:
 3. [How It Works](#how-it-works)
 4. [Training the Model](#training-the-model)
 5. [Running Inference](#running-inference)
-6. [Requirements](#requirements)
-7. [Demo](#demo)
-8. [License](#license)
+6. [API Documentation}
+7. [Requirements](#requirements)
+8. [Demo](#demo)
+9. [License](#license)
 
 ---
 
@@ -59,10 +60,13 @@ news-article-classifier/
 ├── app.py # Flask application for inference
 ├── test.py # test for the endpoint
 │
+├── api/predict.py
+│
 ├── requirements.txt # Python dependencies
 ├── demo_screenshot.png # Screenshot of the web app
 │
 └── README.md # Project documentation
+
 
 ---
 
@@ -118,6 +122,27 @@ To run the Flask web app:
 
 4. Enter a news article in the text box and click "Submit" to see the predicted class and confidence score.
 
+## API Documentation
+
+### How to Use the Predict API
+
+The API allows you to classify news articles into one of four categories: **World**, **Sports**, **Business**, or **Science**. The prediction is based on the text content of the news article provided in the request.
+
+### Endpoint
+
+- **URL**: `/predict`
+- **Method**: `POST`
+- **Content-Type**: `application/json`
+
+### Request Format
+
+Send a POST request to the `/predict` endpoint with the following JSON payload:
+
+```json
+{
+    "text": "Your news article text here..."
+}
+
 ## Requirements
 
 The project requires the following Python libraries: - Flask - cikit-learn - pandas - numpy - nltk - joblib
@@ -130,6 +155,7 @@ Install the dependencies using:
 Demo
 
 Here’s a screenshot of the web app in action:
+Check out the live demo of the application here: [Demo Link](https://news-article-multiclass-classifier.onrender.com/)
 
 Demo Screenshot
 
